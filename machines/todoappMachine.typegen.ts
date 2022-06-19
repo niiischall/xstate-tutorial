@@ -28,20 +28,29 @@ export interface Typegen0 {
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
+    "done.invoke.TodosMachine.SelectTodoToDelete:invocation[0]": {
+      type: "done.invoke.TodosMachine.SelectTodoToDelete:invocation[0]";
+      data: unknown;
+      __tip: "See the XState TS docs to learn how to strongly type this.";
+    };
     "xstate.init": { type: "xstate.init" };
   };
   invokeSrcNameMap: {
     loadTodos: "done.invoke.TodosMachine.TodosLoading:invocation[0]";
     saveTodos: "done.invoke.TodosMachine.CreateNewTodo.SubmitForm:invocation[0]";
+    deleteTodo: "done.invoke.TodosMachine.SelectTodoToDelete:invocation[0]";
   };
   missingImplementations: {
     actions: never;
-    services: "loadTodos" | "saveTodos";
+    services: "loadTodos" | "deleteTodo" | "saveTodos";
     guards: never;
     delays: never;
   };
   eventsCausingServices: {
-    loadTodos: "done.invoke.TodosMachine.CreateNewTodo.SubmitForm:invocation[0]";
+    loadTodos:
+      | "done.invoke.TodosMachine.CreateNewTodo.SubmitForm:invocation[0]"
+      | "done.invoke.TodosMachine.SelectTodoToDelete:invocation[0]";
+    deleteTodo: "DELETE_TODO";
     saveTodos: "SUBMIT_INPUT";
   };
   eventsCausingGuards: {};
@@ -53,6 +62,7 @@ export interface Typegen0 {
     | "CreateNewTodo"
     | "CreateNewTodo.ShowFormInput"
     | "CreateNewTodo.SubmitForm"
+    | "SelectTodoToDelete"
     | { CreateNewTodo?: "ShowFormInput" | "SubmitForm" };
   tags: never;
 }

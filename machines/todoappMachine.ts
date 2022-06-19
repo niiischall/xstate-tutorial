@@ -1,11 +1,12 @@
 import { createMachine, assign } from 'xstate';
 
 export const todoMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FWwLIEMDGAFgJYB2YAdGhrADKo4SlQDEGZ5pAbqgNYVWZchUv3SY6DJgi6o8OAC5FUJANoAGALqJQAB0xFFy7SAAeiAEwB2AIzkAHADYAnOYDMdl+bVrzAFksANCAAnogAtL7mtg6uTgCsTq4Ovq5+fgC+6UEC2PjE7DkSjCQsYABOZahl5DoANgoAZlUAtpRiucIF7UVSMnKGqprGerAGSiTGZghhrpbk1n4JHnFJceZO1kGh01bm5L7Wlmpx1gmWlk4OlpnZ7UL5otRFkMwAwgBKAKIAgsifAPrIADyABEgcN9ANJhZ4vsjnYFq5rL47HFnIEQuFTnFyM47HYkStLL5fHEEjcQDl7iJyK8ymAFGAAHJgADuAnIAGUCKhWQAxFoASRIOgArvJmIKmQAFACqyH+rwAEt8mQBxT4Q0ZQpCmcJOchqc6pRxqfFXOykraIaxOA0nFa+JwohyWtYUql5Gl0hnyZlsjnc3kCsrNYViiWc2UAISwgoVUrlyC1YyMuqm5gcDkNXlSCxW1iRV2tCEc5Gdazslgc5gRySzHruXvYPsZLPZYi5ooARs0DCHmqxlBQZHw2tRqS36W2A53OT2+-IB9ISNx+uN1FpdSNUxN04ga2pyFFInYjXZzJmkiWwmS7LifGTTk6FgtGxPmxRW3724GF-2WmYcpKmqOpGhacdBE-Wlpx-WcMC7XsANDFc1wUDchm3SFxmhBBzDiOY0TWM0s2OfwS0LA1IhOTMXEOSwEWuCkSHQOBjE9TpHnEehiigFMdVAKYwisXxyGJRJ1niNRSQvG8EiPBxH0zV1vEOd8oM4yDaB4yB+Jw-c8IRQ1kjiU8UhOXw1AcG98Kow5jgRKzrFdS11I6B4tKZVB5GeCA9LTQTwhSMSz1RS58SSEkSRvSj9iiZFawLBi3MnL9YP9DsEKDfkhRFcV-L3QLpgNeI3GsbxnSiwsSzPfZSXWA40ScRwVhS6Dvwyv8kKXFoCtwmjyFmC8XDCujXBLUzy1JJFayrDxXDiRw2s0jrfzEPqDJmVxyzWJEKqig5xsxaZrHvMiGNzNZSUW5aHg2orhOasSnVSO04mkxbzBvLNtsU-CrIIqwSMyTIgA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FWwLIEMDGAFgJYB2YAdGhrADKo4SlQDEGZ5pAbqgNYVWZchUv3SY6DJgi6o8OAC5FUJANoAGALqJQAB0xFFy7SAAeiAEwB2AIzkAHADYAnOYDMdl+bVrzAFksANCAAnogAtL4ArGrklk4OkTYODtbWzq4AvhlBAtj4xOy5EowkLGAATuWo5eQ6ADYKAGbVALaUYnnChR3FUjJyhqqaxnqwBkokxmYIYa6W5NZ+kU4eka4J5k7WQaEzVubkvtaWapHWy5ZxDpZZOR1CBaLUxZDMAMIASgCiAILIXwB9ZAAeQAIsCRvpBlMLE5IocTnZFq5rL47JFnIEQuFzvDnHY7Ci1pZfFFlrcQLkHiJ2s96BBXqCvjQvv8gWCIUgQKNxkYudNImjyGpXGsnKdfHCVjscZE8StCec5qS5U4KVT8jS3uUwAowAA5MAAdwE5AAygRUEaAGKtACSJB0AFd5Mw7fqAAoAVWQALeAAkfvqAOJfSFjaH8xAOcgOI6kjxzZKixYyhDmY7CtSS9HZqwpFzq+6a9ja3XyA3G00Wq228otB3O11mr0AISwdt97u9yHDvMmUfTSNirnFKzi8QcrjT1mzh1ckrc1jsvjUSKOReo1NLOr1hpNYnNToARi0DHWWqxlBQZHxaYISxQy3uq4ezSez-IL9ISNwBhN1C0LkeUjUABTseZLHMOxs3RVIVinNMwmueFIkcSwFxsDFEk3B8uifXcK33asP3PVpmAqKoanqJpWnvTpHnIZ8iNfDAj1PMj6x-P8FAA4ZgKhCYYXTDDyGg0dHC8E5LEJGcMXILZ-AcPxLmcRdcIYmkzTAOowDweQBDQUEdLACsr3YW8njwxjtN0-TDNQYzdIrbjZF45RAL7UDTEQGTXEOKwSUsDFzCnNQsV2CInCcMTzDQycRTcNQ1WySli3w80TPssQjJMszKOqWoGnkZp63o7cKFsvSDJyxy8rAVz-w8-jdEEvkwN85L7DmSIM1HONrGnbE9jnGwZJJLwUmufwslSkh0DgYwNQyop6SYLyhMHCJ1nINZevxKC3DRXwkOk3b0KiGC3DFDSKvol4IA29qfIQXxXBiXxQriKx0SsI4hsi1w-FiXwNhsJwoPcbNbsfej9VQeQHqegcOpmN7Yhg9F4gJdZSVJJDBpiz7Uk+9EURkmGMuYysDzYmsbXtR0XWR4T4UsZJQZJXq10OiLEAhhSFxcCHFnFIG7EpxjqeIt9SK-VoWcHXq7GFCHwuzNQ432tMoPnSVjrepERQcSWtUImmBEV1GwmXMTXFFIHBTiRZLgB8IYmw7NJSBjMXDUY5TfYKrsowXLnLAK2XvFeF-GVJxJXj5YTuG5D-MlBxCTOM43EuOLA4jgSI0263QY90VQvHcwjpXU6YPO65R2OQlCV8WaMiAA */
   createMachine({
   context: {
     todos: [] as string[],
     formInput: "",
+    todoToDelete: "",
     errorMessage: undefined as string | undefined,
   },
   tsTypes: {} as import("./todoappMachine.typegen").Typegen0,
@@ -28,6 +29,10 @@ export const todoMachine =
         }
       | {
           type: "SUBMIT_INPUT";
+        }
+      | {
+          type: "DELETE_TODO",
+          value: string,
         },
   },
   id: "TodosMachine",
@@ -54,6 +59,9 @@ export const todoMachine =
       on: {
         CREATE_TODO: {
           target: "CreateNewTodo",
+        },
+        DELETE_TODO: {
+          target: "SelectTodoToDelete",
         },
       },
     },
@@ -89,6 +97,19 @@ export const todoMachine =
         },
       },
     },
+    SelectTodoToDelete: {
+      invoke: {
+        src: "deleteTodo",
+        onDone: [
+          {
+            target: "#TodosMachine.TodosLoading",
+          },
+        ],
+        onError: [{
+          target: "TodosLoaded"
+        }],
+      },
+    },
   },
 },
     {
@@ -96,7 +117,8 @@ export const todoMachine =
         assignTodosToContext: assign((context, event) => {
           return {
             todos: event.data,
-            formInput: ""
+            formInput: "",
+            todoToDelete: "",
           }
         }),
         assignErrorToContext: assign((context, event) => {
@@ -108,6 +130,6 @@ export const todoMachine =
           return {
             formInput: event.value,
           }
-        })
+        }),
       }
     });

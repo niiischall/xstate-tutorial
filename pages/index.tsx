@@ -14,12 +14,16 @@ const Home: NextPage = () => {
       },
       saveTodos: async (context, event) => {
         todos.add(context.formInput);
+      },
+      deleteTodo: async (context, event) => {
+        todos.delete(event.value);
       }
     }
   });
 
   const value = JSON.stringify(state.value);
   const context = JSON.stringify(state.context);
+
   return (
     <div>
       <h1><pre>{value}</pre></h1>
@@ -33,22 +37,37 @@ const Home: NextPage = () => {
           }}>CREATE NEW</button>
         }
         {
+          state.matches('TodosLoaded') && state.context.todos.map((todo) => {
+            return (
+              <div key={todo}>
+                <p>{todo}</p>
+                <button onClick={() => {
+                  send({ 
+                    type: 'DELETE_TODO',
+                    value: todo 
+                  })
+                }}>X</button>
+              </div>
+            )
+          })
+        }
+        {
           state.matches('CreateNewTodo') && (
-          <form onSubmit={(event) => {
-            event.preventDefault();
-            send({
-              type: "SUBMIT_INPUT"
-            })
-          }}>
-            <input onChange={(event) => {
+            <form onSubmit={(event) => {
+              event.preventDefault();
+              send({
+                type: "SUBMIT_INPUT"
+              })
+            }}>
+              <input onChange={(event) => {
                 send({
                   type: 'INPUT_CHANGE',
                   value: event.target.value,
                 })
               }}
-            />
-          </form>
-        )}
+              />
+            </form>
+          )}
       </div>
     </div>
   )
