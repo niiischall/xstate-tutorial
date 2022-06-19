@@ -6,7 +6,8 @@ export interface Typegen0 {
     assignTodosToContext: "done.invoke.TodosMachine.TodosLoading:invocation[0]";
     assignErrorToContext:
       | "error.platform.TodosMachine.TodosLoading:invocation[0]"
-      | "error.platform.TodosMachine.CreateNewTodo.SubmitForm:invocation[0]";
+      | "error.platform.TodosMachine.CreateNewTodo.SubmitForm:invocation[0]"
+      | "error.platform.TodosMachine.SelectTodoToDelete:invocation[0]";
     assignInputToContext: "INPUT_CHANGE";
   };
   internalEvents: {
@@ -21,6 +22,10 @@ export interface Typegen0 {
     };
     "error.platform.TodosMachine.CreateNewTodo.SubmitForm:invocation[0]": {
       type: "error.platform.TodosMachine.CreateNewTodo.SubmitForm:invocation[0]";
+      data: unknown;
+    };
+    "error.platform.TodosMachine.SelectTodoToDelete:invocation[0]": {
+      type: "error.platform.TodosMachine.SelectTodoToDelete:invocation[0]";
       data: unknown;
     };
     "done.invoke.TodosMachine.CreateNewTodo.SubmitForm:invocation[0]": {
@@ -63,6 +68,7 @@ export interface Typegen0 {
     | "CreateNewTodo.ShowFormInput"
     | "CreateNewTodo.SubmitForm"
     | "SelectTodoToDelete"
+    | "DeleteTodoError"
     | { CreateNewTodo?: "ShowFormInput" | "SubmitForm" };
   tags: never;
 }

@@ -16,6 +16,7 @@ const Home: NextPage = () => {
         todos.add(context.formInput);
       },
       deleteTodo: async (context, event) => {
+        throw new Error('Oh no! We cannot delete this.')
         todos.delete(event.value);
       }
     }
@@ -42,14 +43,28 @@ const Home: NextPage = () => {
               <div key={todo}>
                 <p>{todo}</p>
                 <button onClick={() => {
-                  send({ 
+                  send({
                     type: 'DELETE_TODO',
-                    value: todo 
+                    value: todo
                   })
                 }}>X</button>
               </div>
             )
           })
+        }
+        {
+          state.matches('DeleteTodoError') && (
+            <>
+              <p>Something went wrong: {state.context.errorMessage}</p>
+              <button
+                onClick={() => {
+                  send({
+                    type: 'SPEED_UP'
+                  })
+                }}
+              >GO BACK</button>
+            </>
+          )
         }
         {
           state.matches('CreateNewTodo') && (
