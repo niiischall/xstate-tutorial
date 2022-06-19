@@ -10,8 +10,18 @@ const Home: NextPage = () => {
   return (
     <div>
       <h1>{value}</h1>
-      <button onClick={() => send("LOADING_SUCCESS")}>Load Success</button>
-      <button onClick={() => send("LOADING_FAILURE")}>Load Failure</button>
+      <button onClick={() => {
+        send({
+          type: "LOADING_SUCCESS",
+          todos: ['take bins out']
+        })
+      }}>Load Success</button>
+      <button onClick={() => {
+        send({
+          type: "LOADING_FAILURE",
+          errorMessage: 'Oh no!'
+        })
+      }}>Load Failure</button>
     </div>
   )
 }
